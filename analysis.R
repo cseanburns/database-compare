@@ -1,35 +1,46 @@
 library(RColorBrewer) # for plot colors
 library(wordcloud)
 
-dbterms <- read.csv(file = "data.csv", header = TRUE, sep = ":")
+dbterms <- read.csv(file = "database-compare/data.csv", header = TRUE, sep = ":")
 
 dbterms$Term <- as.character(dbterms$Term)
 
 # Merge 1911 with 1910 and 1982 with 1980 start years
 dbterms$StartYear[dbterms$StartYear == 1911 ] <- 1910
 dbterms$StartYear[dbterms$StartYear == 1982 ] <- 1980
- 
-png('plots/growth.png', width = 1920, height = 1080, pointsize = 24)
-plot(table(dbterms$StartYear),
+dbterms$EndYear[dbterms$EndYear == 1991] <- 1999
+
+# Remove all WoS records for subject analysis
+dbtermsSub <- dbterms
+dbtermsSub <- subset(dbtermsSub, Database != "WOS")
+yearsterms <- as.table(tapply(dbtermsSub$Freq, dbtermsSub$StartYear, FUN = sum))
+yearstermsdb <- data.frame(yearsterms)
+
+png('database-compare/plots/growth.png', width = 1920, height = 1080, pointsize = 24)
+plot(yearsterms,
      type = "l",
      xlab = "Decades",
-     ylab = "Count",
-     main = "Growth of Terms Attached to Bibliographic Records")
+     ylab = "Subject Frequencies",
+     main = "Growth of Non-Unique Terms Related to Queries For Fake News")
 dev.off()
 
-year2db <- table(dbterms$Database, dbterms$StartYear)
+# percentage change
+# https://stackoverflow.com/questions/20724203/need-to-calculate-rate-of-change-of-two-data-sets-over-time-individually-and-net
+100 * diff(yearstermsdb$Freq) / yearstermsdb[-nrow(yearstermsdb),]$Freq
+
+year2db <- table(dbtermsSub$Database, dbtermsSub$StartYear)
 year2dbp <- prop.table(year2db, 2)
 
 plotcolors <- brewer.pal(8, "Spectral") 
 
-png('plots/year2dbcounts.png', width = 1920, height = 1080, pointsize = 24)
+png('database-compare/plots/year2dbcounts.png', width = 1920, height = 1080, pointsize = 24)
 barplot(year2db, main = "Count Database Distribution by Decade",
         xlab = "Decades",
         col = plotcolors)
 legend("left", col = plotcolors, fill = plotcolors, legend = rownames(year2db))
 dev.off()
 
-png('plots/year2dbproportions.png', width = 1920, height = 1080, pointsize = 24)
+png('database-compare/plots/year2dbproportions.png', width = 1920, height = 1080, pointsize = 24)
 barplot(year2dbp, main = "Proportion of Database Distribution by Decade",
         xlab = "Decades",
         col = plotcolors)
