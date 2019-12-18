@@ -1,22 +1,28 @@
 library(RColorBrewer) # for plot colors
 library(wordcloud)
 
-dbterms <- read.csv(file = "database-compare/data.csv", header = TRUE, sep = ":")
+dbterms <- read.csv(file = "data.csv", header = TRUE, sep = ":")
 
+# convert terms to characters
 dbterms$Term <- as.character(dbterms$Term)
 
 # Merge 1911 with 1910 and 1982 with 1980 start years
 dbterms$StartYear[dbterms$StartYear == 1911 ] <- 1910
 dbterms$StartYear[dbterms$StartYear == 1982 ] <- 1980
+# Merge odd year out with 1999 end year
 dbterms$EndYear[dbterms$EndYear == 1991] <- 1999
 
 # Remove all WoS records for subject analysis
 dbtermsSub <- dbterms
 dbtermsSub <- subset(dbtermsSub, Database != "WOS")
+
+# Calculate the total number of terms by decade
 yearsterms <- as.table(tapply(dbtermsSub$Freq, dbtermsSub$StartYear, FUN = sum))
+# Convert to data frame
 yearstermsdb <- data.frame(yearsterms)
 
-png('database-compare/plots/growth.png', width = 1920, height = 1080, pointsize = 24)
+# Line plot total number of terms by decade
+png('plots/growth.png', width = 1920, height = 1080, pointsize = 24)
 plot(yearsterms,
      type = "l",
      xlab = "Decades",
@@ -24,16 +30,23 @@ plot(yearsterms,
      main = "Growth of Non-Unique Terms Related to Queries For Fake News")
 dev.off()
 
-# percentage change
+# Calcualte percentage change
 # https://stackoverflow.com/questions/20724203/need-to-calculate-rate-of-change-of-two-data-sets-over-time-individually-and-net
 100 * diff(yearstermsdb$Freq) / yearstermsdb[-nrow(yearstermsdb),]$Freq
 
+# Focus on frequency of database
+# This needs to be re-coded and take $Freq into consideration
 year2db <- table(dbtermsSub$Database, dbtermsSub$StartYear)
+barplot(year2db)
+freq2db <- table(dbtermsSub$Freq, dbtermsSub$Database)
+barplot(freq2db)
+legend("left", col = plotcolors, fill = dbtermsSub$Freq, legend = rownames(year2db))
+
 year2dbp <- prop.table(year2db, 2)
 
 plotcolors <- brewer.pal(8, "Spectral") 
 
-png('database-compare/plots/year2dbcounts.png', width = 1920, height = 1080, pointsize = 24)
+png('plots/year2dbcounts.png', width = 1920, height = 1080, pointsize = 24)
 barplot(year2db, main = "Count Database Distribution by Decade",
         xlab = "Decades",
         col = plotcolors)
@@ -135,8 +148,6 @@ wordcloud(mw$X1[mw$X2 > 60], mw$X2[mw$X2 > 60],
           random.order = FALSE)
 
 
-
-
 x <- dbterms$Term
 y <- dbterms$Freq
 allterms <- rep(x, times = c(y))
@@ -146,7 +157,6 @@ rle(allterms)
 png('plots/termsbydb.png', width = 1920, height = 1080, pointsize = 24)
 plot(dbterms$Database, log(dbterms$Freq))
 dev.off()
-
 
 dbterms$Term <- as.character(dbterms$Term)
 
