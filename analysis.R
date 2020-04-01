@@ -16,41 +16,130 @@ dbterms$EndYear[dbterms$EndYear == 1991] <- 1999
 yearsterms <- as.table(tapply(dbterms$Freq, dbterms$StartYear, FUN = sum))
 # Convert to data frame
 yearstermsdb <- data.frame(yearsterms)
+names(yearstermsdb) <- c("Decade", "Frequency")
+yearstermsdb$Decade <- as.Date(yearstermsdb$Decade, "%Y")
 
 # Line plot total number of terms by decade
-png('plots/growth.png', width = 1920, height = 1080, pointsize = 24)
-plot(yearsterms,
-     type = "l",
+jpeg('plots/growth.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+plot(yearstermsdb$Decade, yearstermsdb$Frequency,
+     type = "b",
      xlab = "Decades",
      ylab = "Subject Frequencies",
      main = "Growth of Non-Unique Terms Related to Queries For Fake News")
+text(yearstermsdb$Decade, yearstermsdb$Frequency, pos = 2,
+     offset = 1,
+     labels = yearstermsdb$Frequency)
 dev.off()
 
-# Calcualte percentage change
-# https://stackoverflow.com/questions/20724203/need-to-calculate-rate-of-change-of-two-data-sets-over-time-individually-and-net
-100 * diff(yearstermsdb$Freq) / yearstermsdb[-nrow(yearstermsdb),]$Freq
-
-# Focus on frequency of database
-# This needs to be re-coded and take $Freq into consideration
-year2db <- table(dbterms$Database, dbterms$StartYear)
-year2dbp <- prop.table(year2db, 2)
-
+# Focus on frequency of database, weighted by frequency of terms per database
 plotcolors <- brewer.pal(8, "Spectral") 
 
-png('plots/year2dbcounts.png', width = 1920, height = 1080, pointsize = 24)
-barplot(year2db, main = "Count Database Distribution by Decade",
-        xlab = "Decades",
-        col = plotcolors)
-legend("left", col = plotcolors, fill = plotcolors, legend = rownames(year2db))
+weightedDB <- count(dbterms, vars = 'Database', wt_var = 'Freq')
+names(weightedDB) <- c('Database', 'Term_Frequency')
+weightedDB$Percentage <- round(weightedDB$Term_Frequency / sum(dbterms$Freq) * 100, 2)
+
+jpeg('plots/weightedDB.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+barplot(weightedDB$Term_Frequency, col = plotcolors,
+        names.arg = weightedDB$Database)
 dev.off()
 
-png('plots/year2dbproportions.png', width = 1920, height = 1080, pointsize = 24)
-barplot(year2dbp, main = "Proportion of Database Distribution by Decade",
-        xlab = "Decades",
-        col = plotcolors)
-legend("bottomleft", col = plotcolors,
-       fill = plotcolors, legend = rownames(year2dbp), ncol = 1)
+# Set up barplots by decade and frequency of terms per database
+weightedDB1890 <- subset(dbterms, subset = dbterms$StartYear == 1890)
+weightedDB1890 <- count(weightedDB1890, vars = 'Database', wt_var = 'Freq')
+weightedDB1890$Decade <- "1890"
+
+weightedDB1900 <- subset(dbterms, subset = dbterms$StartYear == 1900)
+weightedDB1900 <- count(weightedDB1900, vars = 'Database', wt_var = 'Freq')
+weightedDB1900$Decade <- "1900"
+
+weightedDB1910 <- subset(dbterms, subset = dbterms$StartYear == 1910)
+weightedDB1910 <- count(weightedDB1910, vars = 'Database', wt_var = 'Freq')
+weightedDB1910$Decade <- "1910"
+
+weightedDB1920 <- subset(dbterms, subset = dbterms$StartYear == 1920)
+weightedDB1920 <- count(weightedDB1920, vars = 'Database', wt_var = 'Freq')
+weightedDB1920$Decade <- "1920"
+
+weightedDB1930 <- subset(dbterms, subset = dbterms$StartYear == 1930)
+weightedDB1930 <- count(weightedDB1930, vars = 'Database', wt_var = 'Freq')
+weightedDB1930$Decade <- "1930"
+
+weightedDB1940 <- subset(dbterms, subset = dbterms$StartYear == 1940)
+weightedDB1940 <- count(weightedDB1940, vars = 'Database', wt_var = 'Freq')
+weightedDB1940$Decade <- "1940"
+
+weightedDB1950 <- subset(dbterms, subset = dbterms$StartYear == 1950)
+weightedDB1950 <- count(weightedDB1950, vars = 'Database', wt_var = 'Freq')
+weightedDB1950$Decade <- "1950"
+
+weightedDB1960 <- subset(dbterms, subset = dbterms$StartYear == 1960)
+weightedDB1960 <- count(weightedDB1960, vars = 'Database', wt_var = 'Freq')
+weightedDB1960$Decade <- "1960"
+
+weightedDB1970 <- subset(dbterms, subset = dbterms$StartYear == 1970)
+weightedDB1970 <- count(weightedDB1970, vars = 'Database', wt_var = 'Freq')
+weightedDB1970$Decade <- "1970"
+
+weightedDB1980 <- subset(dbterms, subset = dbterms$StartYear == 1980)
+weightedDB1980 <- count(weightedDB1980, vars = 'Database', wt_var = 'Freq')
+weightedDB1980$Decade <- "1980"
+
+weightedDB1990 <- subset(dbterms, subset = dbterms$StartYear == 1990)
+weightedDB1990 <- count(weightedDB1990, vars = 'Database', wt_var = 'Freq')
+weightedDB1990$Decade <- "1990"
+
+weightedDB2000 <- subset(dbterms, subset = dbterms$StartYear == 2000)
+weightedDB2000 <- count(weightedDB2000, vars = 'Database', wt_var = 'Freq')
+weightedDB2000$Decade <- "2000"
+
+weightedDB2010 <- subset(dbterms, subset = dbterms$StartYear == 2010)
+weightedDB2010 <- count(weightedDB2010, vars = 'Database', wt_var = 'Freq')
+weightedDB2010$Decade <- "2010"
+
+jpeg('plots/decadefreqbarplots.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+par(mfrow = c(4, 4))
+barplot(weightedDB1890$freq, names.arg = weightedDB1890$Database, las = 2, col = plotcolors, main = "1890s")
+barplot(weightedDB1900$freq, names.arg = weightedDB1900$Database, las = 2, col = plotcolors, main = "1900s")
+barplot(weightedDB1910$freq, names.arg = weightedDB1910$Database, las = 2, col = plotcolors, main = "1910s")
+barplot(weightedDB1920$freq, names.arg = weightedDB1920$Database, las = 2, col = plotcolors, main = "1920s")
+barplot(weightedDB1930$freq, names.arg = weightedDB1930$Database, las = 2, col = plotcolors, main = "1930s")
+barplot(weightedDB1940$freq, names.arg = weightedDB1940$Database, las = 2, col = plotcolors, main = "1940s")
+barplot(weightedDB1950$freq, names.arg = weightedDB1950$Database, las = 2, col = plotcolors, main = "1950s")
+barplot(weightedDB1960$freq, names.arg = weightedDB1960$Database, las = 2, col = plotcolors, main = "1960s")
+barplot(weightedDB1970$freq, names.arg = weightedDB1970$Database, las = 2, col = plotcolors, main = "1970s")
+barplot(weightedDB1980$freq, names.arg = weightedDB1980$Database, las = 2, col = plotcolors, main = "1980s")
+barplot(weightedDB1990$freq, names.arg = weightedDB1990$Database, las = 2, col = plotcolors, main = "1990s")
+barplot(weightedDB2000$freq, names.arg = weightedDB2000$Database, las = 2, col = plotcolors, main = "2000s")
+barplot(weightedDB2010$freq, names.arg = weightedDB2010$Database, las = 2, col = plotcolors, main = "2010s")
 dev.off()
+
+rm(weightedDB1890, weightedDB1900, weightedDB1910, weightedDB1920, weightedDB1930,
+   weightedDB1940, weightedDB1950, weightedDB1960, weightedDB1970, weightedDB1980,
+   weightedDB1990, weightedDB2000, weightedDB2010)
+
+## Term Analysis
+# https://rstudio-pubs-static.s3.amazonaws.com/66739_c4422a1761bd4ee0b0bb8821d7780e12.html
+# build corpus
+myCorpus <- Corpus(VectorSource(dbterms$Term))
+myCorpus <- tm_map(myCorpus, content_transformer(tolower))
+myCorpus <- tm_map(myCorpus, removePunctuation) 
+myCorpus <- tm_map(myCorpus, removeNumbers)
+myStopwords <- stopwords("english")
+myCorpus <- tm_map(myCorpus, removeWords, myStopwords)
+ 
+# keep copy
+myCorpusCopy <- myCorpus
+# stem words
+myCorpus <- tm_map(myCorpus, stemDocument)
+
+tdm <- TermDocumentMatrix(myCorpus, control = list(wordLengths = c(1, Inf)))
+term.freq <- rowSums(as.matrix(tdm))
+term.freq <- subset(term.freq, term.freq >=50)
+df <- data.frame(term = names(term.freq), freq = term.freq)
+df <- df[order(df$freq),]
+
+plot(df, las = 2)
+barplot(df$freq, names.arg = df$term, las = 2, horiz = TRUE)
 
 # Notes from meeting with Jenny
 # look at terms by database in order to capture field differences, but
