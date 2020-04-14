@@ -1,18 +1,31 @@
-Research project comparing database results.
+## Research project comparing database results
 
-1. data.csv is main data
-2. data-wos.csv is data from WOS. Kept separate since WOS is more general than the other databases in data.csv
+- ``data/data.csv`` is main data
 
-Later:
+### Notes
 
-1. Merge data-wos.csv and Scopus.xlsx into a single file called data-general.csv
+#### Files
 
-Notes:
-
-When exporting the data-dates.ods data to CSV, need to strip the non-printable
-characters from the file. Did that in Vim (for some reason, couldn't get it to
-work in ``sed``.
+- ``archived-data/misinformation_compare_10_30jb.xlsx`` is the original data
+  file created by @bossjen and was copied and pasted into a single sheet named
+  ``data.ods``. 
+- When exporting the ``archived-data/data.ods`` data to CSV
+  (``archived-data/data.csv``), I needed to strip the non-printable characters
+  from the file (from Microsoft Excel???). Did that in Vim because for some
+  reason, I couldn't get it to work in ``sed``. In Vim, after saving
+  ``archived-data/data.ods`` as a CSV file:
 
 ```Vim
 %s/[^[:print:]]//
 ```
+#### Scripts
+
+- ``analysis.R`` is the script to examine database frequencies by decades
+- ``term-analysis.R`` is the script to examine terms by database by decades
+
+#### Other data
+
+Not using in this repo, but keeping here for @bossjen.
+
+1. ``data-archived/scopus.xlsxi`` is dat from *Scopus*
+2. ``data-archived/data-wos.csv`` is data from *Web of Science*
