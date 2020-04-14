@@ -1,6 +1,7 @@
-library(RColorBrewer) # for plot colors
+library("RColorBrewer") # for plot colors
+library("plyr") # for count function
 
-setwd('/home/sean/Dropbox/workspace/database-compare/')
+#setwd('/home/sean/Dropbox/workspace/database-compare/') # when I'm using NVim-R
 dbterms <- read.csv(file = "data.csv", header = TRUE, sep = "\t")
 
 # convert terms to characters
@@ -20,7 +21,7 @@ names(yearstermsdb) <- c("Decade", "Frequency")
 yearstermsdb$Decade <- as.Date(yearstermsdb$Decade, "%Y")
 
 # Line plot total number of terms by decade
-jpeg('plots/growth.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+#jpeg('plots/growth.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 plot(yearstermsdb$Decade, yearstermsdb$Frequency,
      type = "b",
      xlab = "Decades",
@@ -29,7 +30,7 @@ plot(yearstermsdb$Decade, yearstermsdb$Frequency,
 text(yearstermsdb$Decade, yearstermsdb$Frequency, pos = 2,
      offset = 1,
      labels = yearstermsdb$Frequency)
-dev.off()
+#dev.off()
 
 # Focus on frequency of database, weighted by frequency of terms per database
 plotcolors <- brewer.pal(8, "Spectral") 
@@ -38,10 +39,10 @@ weightedDB <- count(dbterms, vars = 'Database', wt_var = 'Freq')
 names(weightedDB) <- c('Database', 'Term_Frequency')
 weightedDB$Percentage <- round(weightedDB$Term_Frequency / sum(dbterms$Freq) * 100, 2)
 
-jpeg('plots/weightedDB.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+#jpeg('plots/weightedDB.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 barplot(weightedDB$Term_Frequency, col = plotcolors,
         names.arg = weightedDB$Database)
-dev.off()
+#dev.off()
 
 # Set up barplots by decade and frequency of terms per database
 weightedDB1890 <- subset(dbterms, subset = dbterms$StartYear == 1890)
@@ -96,7 +97,7 @@ weightedDB2010 <- subset(dbterms, subset = dbterms$StartYear == 2010)
 weightedDB2010 <- count(weightedDB2010, vars = 'Database', wt_var = 'Freq')
 weightedDB2010$Decade <- "2010"
 
-jpeg('plots/decadefreqbarplots.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+#jpeg('plots/decadefreqbarplots.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 par(mfrow = c(4, 4))
 barplot(weightedDB1890$freq, names.arg = weightedDB1890$Database, las = 2, col = plotcolors, main = "1890s")
 barplot(weightedDB1900$freq, names.arg = weightedDB1900$Database, las = 2, col = plotcolors, main = "1900s")
@@ -111,56 +112,8 @@ barplot(weightedDB1980$freq, names.arg = weightedDB1980$Database, las = 2, col =
 barplot(weightedDB1990$freq, names.arg = weightedDB1990$Database, las = 2, col = plotcolors, main = "1990s")
 barplot(weightedDB2000$freq, names.arg = weightedDB2000$Database, las = 2, col = plotcolors, main = "2000s")
 barplot(weightedDB2010$freq, names.arg = weightedDB2010$Database, las = 2, col = plotcolors, main = "2010s")
-dev.off()
+#dev.off()
 
 rm(weightedDB1890, weightedDB1900, weightedDB1910, weightedDB1920, weightedDB1930,
    weightedDB1940, weightedDB1950, weightedDB1960, weightedDB1970, weightedDB1980,
    weightedDB1990, weightedDB2000, weightedDB2010)
-
-## Term Analysis
-# https://rstudio-pubs-static.s3.amazonaws.com/66739_c4422a1761bd4ee0b0bb8821d7780e12.html
-# build corpus
-myCorpus <- Corpus(VectorSource(dbterms$Term))
-myCorpus <- tm_map(myCorpus, content_transformer(tolower))
-myCorpus <- tm_map(myCorpus, removePunctuation) 
-myCorpus <- tm_map(myCorpus, removeNumbers)
-myStopwords <- stopwords("english")
-myCorpus <- tm_map(myCorpus, removeWords, myStopwords)
- 
-# keep copy
-myCorpusCopy <- myCorpus
-# stem words
-myCorpus <- tm_map(myCorpus, stemDocument)
-
-tdm <- TermDocumentMatrix(myCorpus, control = list(wordLengths = c(1, Inf)))
-term.freq <- rowSums(as.matrix(tdm))
-term.freq <- subset(term.freq, term.freq >=50)
-df <- data.frame(term = names(term.freq), freq = term.freq)
-df <- df[order(df$freq),]
-
-plot(df, las = 2)
-barplot(df$freq, names.arg = df$term, las = 2, horiz = TRUE)
-
-# Notes from meeting with Jenny
-# look at terms by database in order to capture field differences, but
-# also combine terms to be database agnostic 
-# look at terms by decade in order to capture time series changes, but
-# also combine terms to be date agnostic
-
-# data with high frequency (HF) terms only for that decade (greater than mean) 
-
-png('plots/heatmap1930.png', width = 1920, height = 1080, pointsize = 24)
-dbtermsHF <- dbterms[dbterms$Freq > 4, ]
-x <- dbtermsHF$Term[dbtermsHF$StartYear == 1930]
-y <- dbtermsHF$Database[dbtermsHF$StartYear == 1930]
-mdata <- as.matrix(table(x, y))
-heatmap(mdata, Colv = NA, Rowv = NA, scale = "row", col = plotcolors)
-dev.off()
-
-png('plots/heatmap2010.png', width = 1920, height = 1080, pointsize = 24)
-dbtermsHF <- dbterms[dbterms$Freq > 110, ]
-x <- dbtermsHF$Term[dbtermsHF$StartYear == 2010]
-y <- dbtermsHF$Database[dbtermsHF$StartYear == 2010]
-mdata <- as.matrix(table(x, y))
-heatmap(mdata, Colv = NA, Rowv = NA, scale = "row", col = plotcolors)
-dev.off()
