@@ -2,7 +2,7 @@ library("RColorBrewer") # for plot colors
 library("plyr") # for count function
 
 #setwd('/home/sean/Dropbox/workspace/database-compare/') # when I'm using NVim-R
-dbterms <- read.csv(file = "data.csv", header = TRUE, sep = "\t")
+dbterms <- read.csv(file = "data/data.csv", header = TRUE, sep = "\t")
 
 # convert terms to characters
 dbterms$Term <- as.character(dbterms$Term)
