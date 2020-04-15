@@ -116,5 +116,6 @@ barplot(weightedDB2010$freq, names.arg = weightedDB2010$Database, las = 2, col =
 
 rm(weightedDB1890, weightedDB1900, weightedDB1910, weightedDB1920, weightedDB1930,
    weightedDB1940, weightedDB1950, weightedDB1960, weightedDB1970, weightedDB1980,
-   weightedDB1990, weightedDB2000, weightedDB2010)
+   weightedDB1990, weightedDB2000, weightedDB2010, weightedDB)
 rm(yearsterms, yearstermsdb)
+rm(plotcolors)
