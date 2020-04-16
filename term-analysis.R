@@ -1,13 +1,9 @@
 ## Term Analysis
 ## Main reference: https://www.tidytextmining.com/tidytext.html
 
-source("analysis.R")
+source("data-prep.R")
 detach("package:RColorBrewer", unload = TRUE)
-library(dplyr)
-library(scales)
-library(tidyr)
-library(tidytext)
-library(ggplot2)
+
 
 ### Section 1: Word frequencies ###
 # The following section examines single terms only; but this is misleading
