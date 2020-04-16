@@ -3,7 +3,7 @@
 
 source("data-prep.R")
 detach("package:RColorBrewer", unload = TRUE)
-
+library(vistime)
 
 ### Section 1: Word frequencies ###
 # The following section examines single terms only; but this is misleading
