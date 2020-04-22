@@ -1,10 +1,8 @@
 library(plyr) # for count function
 library(dplyr)
-library(scales)
 library(tidyr)
 library(tidytext)
 library(ggplot2)
-library(vistime)
 
 #setwd('/home/sean/Dropbox/workspace/database-compare/') # when I'm using NVim-R
 dbterms <- read.csv(file = "data/data.csv", header = TRUE, sep = "\t")
