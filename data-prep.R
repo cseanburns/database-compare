@@ -15,3 +15,4 @@ dbterms$StartYear[dbterms$StartYear == 1911 ] <- 1910
 dbterms$StartYear[dbterms$StartYear == 1982 ] <- 1980
 # Merge odd year out with 1999 end year
 dbterms$EndYear[dbterms$EndYear == 1991] <- 1999
+
