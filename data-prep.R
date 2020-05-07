@@ -8,6 +8,7 @@ dbterms <- read.csv(file = "data/data.csv", header = TRUE, sep = "\t")
 
 # convert terms to characters
 dbterms$Term <- as.character(dbterms$Term)
+dbterms$Freq <- as.integer(dbterms$Freq)
 
 # Merge 1886 with 1880
 dbterms$StartYear[dbterms$StartYear == 1886] <- 1880
