@@ -20,7 +20,7 @@ The data file (``data.csv``) contains the following variables:
 - EndYear (integer): A marker indicating the end of the decade the terms appear
 - Database (factor): The name of the bibliographic database
 - Platform (factor): The name of the bibliographic database provider
-- TermType (factor): The type of controlled vocaculary. Using the name provided
+- TermType (factor): The type of controlled vocabulary. Using the name provided
   by the Platform
 
 Databases/Platforms include:
