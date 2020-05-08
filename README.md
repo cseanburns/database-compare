@@ -1,32 +1,31 @@
-## Research project comparing database results
+## Research project: Bibliographic Databases and Fake News
 
-- ``data/data.csv`` is main data
+Research project examining the history of fake news and related topics, such as
+misinformation, disinformation, and propaganda as indexed in a variety of
+bibliographic databases.
 
-### Notes
+### Data Files
 
-#### Files
+The ``data/data.csv`` is the main data file, which was exported as a CSV file
+from ``data/maindata.xlsx``. The data is extracted from ten bibliographic
+databases covering a variety of disciplines and topic areas, such as
+psychology, business, library and information science, sociology, and more.
+Each database was searched using the same search strategy. 
 
-- ``archived-data/misinformation_compare_10_30jb.xlsx`` is the original data
-  file created by @bossjen and was copied and pasted into a single sheet named
-  ``data.ods``. 
-- When exporting the ``archived-data/data.ods`` data to CSV
-  (``archived-data/data.csv``), I needed to strip the non-printable characters
-  from the file (from Microsoft Excel???). Did that in Vim because for some
-  reason, I couldn't get it to work in ``sed``. In Vim, after saving
-  ``archived-data/data.ods`` as a CSV file:
+The data file (``data.csv``) contains the following variables:
 
-```Vim
-%s/[^[:print:]]//
-```
-#### Scripts
+- Term (string): The controlled terms in the bibliographic databases 
+- Freq (integer): The frequency the terms appear in the bibliographic database
+- StartYear (integer): A marker indicating the start of the decade the terms appear
+- EndYear (integer): A marker indicating the end of the decade the terms appear
+- Database (factor): The name of the bibliographic database
+- Platform (factor): The name of the bibliographic database provider
+- TermType (factor): The type of controlled vocaculary. Using the name provided
+  by the Platform
 
-- ``analysis.R`` is the script to examine database frequencies by decades
-- ``term-analysis.R`` is the script to examine terms by database by decades
+### Scripts
 
-#### Other data
-
-Not using in this repo, but keeping here for @bossjen.
-
-1. ``data-archived/scopus.xlsx`` is dat from *Scopus*
-2. ``data-archived/data-wos.csv`` is data from *Web of Science*
-3. ``data-archived/Medline/`` is from *Medline*
+- ``1-data-prep.R`` is a script that cleans and preps the data for analysis
+- ``2-basic-analysis.R`` is a script for basic exploratory analysis
+- ``3-term-analysis.R`` is a script that looks more closely at the terms
+- ``4-topic-modeling.R`` is a script to model the topics by database and by decade
