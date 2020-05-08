@@ -1,12 +1,13 @@
 ## Term Analysis
 ## Main reference: https://www.tidytextmining.com/tidytext.html
 
-source("1-data-prep.R")
-detach("package:RColorBrewer", unload = TRUE)
+#source("1-data-prep.R")
+#detach("package:RColorBrewer", unload = TRUE)
 
 ##### Section 1: tf*idf by Term Type #####
 
-## 1880 - 1929
+# 1880 - 1929
+
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- subset(termstfidf, EndYear < 1930)
@@ -14,20 +15,23 @@ termstfidf <- subset(termstfidf, EndYear < 1930)
 termstfidf <- termstfidf %>%
   count(TermType, Term) %>%
   bind_tf_idf(Term, TermType, n) %>%
-  arrange(desc(tf_idf)) %>%
+  arrange(desc(tf)) %>%
   head(50)
 
+jpeg('plots/terms-by-termtype-1880-1920s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
-  ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = TermType)) +
+  ggplot(aes(x = reorder(Term, tf), y = tf, fill = TermType)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Fifty Most Highly Ranked Terms for 1880s through 1920s") +
+  ggtitle("Fifty Most Frequent Terms for 1880s through 1920s") +
   xlab("Terms") +
-  ylab("") +
+  ylab("Term Frequencies") +
   theme(text = element_text(face = "bold"))
+dev.off()
 
-## 1930 - 1959
+# 1930 - 1959
+
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- termstfidf %>% filter(EndYear > 1930 & EndYear < 1960)
@@ -35,20 +39,23 @@ termstfidf <- termstfidf %>% filter(EndYear > 1930 & EndYear < 1960)
 termstfidf <- termstfidf %>%
   count(TermType, Term) %>%
   bind_tf_idf(Term, TermType, n) %>%
-  arrange(desc(tf_idf)) %>%
+  arrange(desc(tf)) %>%
   head(50)
 
+jpeg('plots/terms-by-termtype-1930-1950s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
-  ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = TermType)) +
+  ggplot(aes(x = reorder(Term, tf), y = tf, fill = TermType)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Fifty Most Highly Ranked Terms for 1930s through 1950s") +
+  ggtitle("Fifty Most Frequent Terms for 1930s through 1950s") +
   xlab("Terms") +
-  ylab("") +
+  ylab("Term Frequencies") +
   theme(text = element_text(face = "bold"))
+dev.off()
 
-## 1960 - 1989
+# 1960 - 1989
+
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- termstfidf %>% filter(EndYear > 1960 & EndYear < 1990)
@@ -56,20 +63,23 @@ termstfidf <- termstfidf %>% filter(EndYear > 1960 & EndYear < 1990)
 termstfidf <- termstfidf %>%
   count(TermType, Term) %>%
   bind_tf_idf(Term, TermType, n) %>%
-  arrange(desc(tf_idf)) %>%
+  arrange(desc(tf)) %>%
   head(50)
 
+jpeg('plots/terms-by-termtype-1960-1980s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
-  ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = TermType)) +
+  ggplot(aes(x = reorder(Term, tf), y = tf, fill = TermType)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Fifty Most Highly Ranked Terms for 1960s through 1980s") +
+  ggtitle("Fifty Most Frequent Terms for 1960s through 1980s") +
   xlab("Terms") +
-  ylab("") +
+  ylab("Term Frequencies") +
   theme(text = element_text(face = "bold"))
+dev.off()
 
-## 1990 - 2019
+# 1990 - 2019
+
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- termstfidf %>% filter(EndYear > 1990)
@@ -77,22 +87,25 @@ termstfidf <- termstfidf %>% filter(EndYear > 1990)
 termstfidf <- termstfidf %>%
   count(TermType, Term) %>%
   bind_tf_idf(Term, TermType, n) %>%
-  arrange(desc(tf_idf)) %>%
+  arrange(desc(tf)) %>%
   head(50)
 
+jpeg('plots/terms-by-termtype-1990-2010s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
-  ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = TermType)) +
+  ggplot(aes(x = reorder(Term, tf), y = tf, fill = TermType)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Fifty Most Highly Ranked Terms for 1990s through 2010s") +
+  ggtitle("Fifty Most Frequent Terms for 1990s through 2010s") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
+dev.off()
 
 ##### Section 2: tf*idf by Database #####
 
-## 1890 - 1929
+# 1890 - 1929
+
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- subset(termstfidf, EndYear < 1930)
@@ -100,22 +113,22 @@ termstfidf <- subset(termstfidf, EndYear < 1930)
 termstfidf <- termstfidf %>%
   count(Database, Term) %>%
   bind_tf_idf(Term, Database, n) %>%
-  arrange(desc(tf_idf)) %>%
+  arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsbyDB1880-1920s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-by-database-1880-1920s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
-  ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = Database)) +
+  ggplot(aes(x = reorder(Term, tf), y = tf, fill = Database)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Fifty Most Highly Ranked Terms for 1880s through 1920s") +
+  ggtitle("Fifty Most Frequent Terms for 1880s through 1920s") +
   xlab("Terms") +
-  ylab("") +
+  ylab("Term Frequencies") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
-## 1930 - 1959
+# 1930 - 1959
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- termstfidf %>% filter(EndYear > 1930 & EndYear < 1960)
@@ -123,22 +136,23 @@ termstfidf <- termstfidf %>% filter(EndYear > 1930 & EndYear < 1960)
 termstfidf <- termstfidf %>%
   count(Database, Term) %>%
   bind_tf_idf(Term, Database, n) %>%
-  arrange(desc(tf_idf)) %>%
+  arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsbyDB1930-1950s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-by-database-1930-1950s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
-  ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = Database)) +
+  ggplot(aes(x = reorder(Term, tf), y = tf, fill = Database)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Fifty Most Highly Ranked Terms for 1930s through 1950s") +
+  ggtitle("Fifty Most Frequent Terms for 1930s through 1950s") +
   xlab("Terms") +
-  ylab("") +
+  ylab("Term Frequencies") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
-## 1960 - 1989
+# 1960 - 1989
+
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- termstfidf %>% filter(EndYear > 1960 & EndYear < 1990)
@@ -146,22 +160,23 @@ termstfidf <- termstfidf %>% filter(EndYear > 1960 & EndYear < 1990)
 termstfidf <- termstfidf %>%
   count(Database, Term) %>%
   bind_tf_idf(Term, Database, n) %>%
-  arrange(desc(tf_idf)) %>%
+  arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsbyDB1960-1980s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-by-database-1960-1980s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
-  ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = Database)) +
+  ggplot(aes(x = reorder(Term, tf), y = tf, fill = Database)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Fifty Most Highly Ranked Terms for 1960s through 1980s") +
+  ggtitle("Fifty Most Frequent Terms for 1960s through 1980s") +
   xlab("Terms") +
-  ylab("") +
+  ylab("Term Frequencies") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
-## 1990 - 2019
+# 1990 - 2019
+
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- termstfidf %>% filter(EndYear > 1990)
@@ -169,16 +184,16 @@ termstfidf <- termstfidf %>% filter(EndYear > 1990)
 termstfidf <- termstfidf %>%
   count(Database, Term) %>%
   bind_tf_idf(Term, Database, n) %>%
-  arrange(desc(tf_idf)) %>%
+  arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsbyDB1990-2010s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-by-database-1990-2010s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
-  ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = Database)) +
+  ggplot(aes(x = reorder(Term, tf), y = tf, fill = Database)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Fifty Most Highly Ranked Terms for 1990s through 2010s") +
+  ggtitle("Fifty Most Frequent Terms for 1990s through 2010s") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -210,7 +225,7 @@ termstfidfBSP <- termstfidfBSP %>%
   arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsinBSP.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-in-BSP.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfBSP %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
@@ -230,7 +245,7 @@ termstfidfCINAHL <- termstfidfCINAHL %>%
   arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsinCINAHL.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-in-CINAHL.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfCINAHL %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
@@ -250,7 +265,7 @@ termstfidfCMMC <- termstfidfCMMC %>%
   arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsinCMMC.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-in-CMMC.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfCMMC %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
@@ -270,7 +285,7 @@ termstfidfEconLit <- termstfidfEconLit %>%
   arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsinEconLit.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-in-EconLit.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfEconLit %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
@@ -290,7 +305,7 @@ termstfidfEFT <- termstfidfEFT %>%
   arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsinEFT.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-in-EFT.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfEFT %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
@@ -310,7 +325,7 @@ termstfidfEIR <- termstfidfEIR %>%
   arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsinEIR.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-in-EIR.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfEIR %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
@@ -330,7 +345,7 @@ termstfidfGW <- termstfidfGW %>%
   arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsinGW.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-in-GW.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfGW %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
@@ -350,7 +365,7 @@ termstfidfLISTA <- termstfidfLISTA %>%
   arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsinLISTA.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-in-LISTA.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfLISTA %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
@@ -370,7 +385,7 @@ termstfidfLL <- termstfidfLL %>%
   arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsinLL.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-in-LL.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfLL %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
@@ -390,7 +405,7 @@ termstfidfPI <- termstfidfPI %>%
   arrange(desc(tf)) %>%
   head(50)
 
-jpeg('plots/termsinPI.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/terms-in-PI.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfPI %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
