@@ -23,6 +23,21 @@ The data file (``data.csv``) contains the following variables:
 - TermType (factor): The type of controlled vocaculary. Using the name provided
   by the Platform
 
+Databases/Platforms include:
+
+| Database                                     | Platform  |
+|----------------------------------------------|-----------|
+| Business Source Premier (BSP)                | EBSCOHost |
+| CINAHL                                       | EBSCOHost |
+| Communication and Mass MEDIA Complete (CMMC) | EBSCOHost |
+| EconLit                                      | ProQuest  |
+| Education Full Text (EFT)                    | EBSCOHost |
+| Education Index Retrospective (EIR)          | EBSCOHost |
+| Gender Watch (GW)                            | ProQuest  |
+| Library, Info Sci and Tech Abstracts (LISTA) | EBSCOHost |
+| Library Lit and Information Science (LL)     | EBSCOHost |
+| PsychInfo (PI)                               | EBSCOHost |
+
 ### Scripts
 
 - ``1-data-prep.R`` is a script that cleans and preps the data for analysis
