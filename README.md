@@ -27,5 +27,5 @@ The data file (``data.csv``) contains the following variables:
 
 - ``1-data-prep.R`` is a script that cleans and preps the data for analysis
 - ``2-basic-analysis.R`` is a script for basic exploratory analysis
-- ``3-term-analysis.R`` is a script that looks more closely at the terms
-- ``4-topic-modeling.R`` is a script to model the topics by database and by decade
+- ``3-term-analysis.R`` is a script that looks more closely at the terms on
+  a database and decade level
