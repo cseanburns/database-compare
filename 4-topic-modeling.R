@@ -1,16 +1,19 @@
 ## Topic Modeling
 
+library(topicmodels)
+
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 
 termstfidf <- termstfidf %>% count(Database, Term)
 
 termstfidf <- termstfidf %>% cast_dtm(Database, Term, n)
-termstfidf <- LDA(termstfidf, k = 2, control = list(seed = 1000))
+termstfidf <- LDA(termstfidf, k = 10, control = list(seed = 1000))
 
-dbtopics <- tidy(termstfidf, matrix = "beta")
+alltopics <- tidy(termstfidf, matrix = "beta")
+dbtopics  <- tidy(termstfidf, matrix = "gamma")
 
-dbtopterms <- dbtopics %>%
+dbtopterms <- alltopics %>%
   group_by(topic) %>%
   top_n(10, beta) %>%
   ungroup() %>%
@@ -23,3 +26,6 @@ dbtopterms %>%
   facet_wrap(~topic, scales = "free") +
   coord_flip() +
   scale_x_reordered()
+
+# Each document (database) as a mixture of topics
+
