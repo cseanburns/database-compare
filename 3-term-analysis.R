@@ -1,12 +1,12 @@
 ## Term Analysis
 ## Main reference: https://www.tidytextmining.com/tidytext.html
 
-source("data-prep.R")
+source("1-data-prep.R")
 detach("package:RColorBrewer", unload = TRUE)
 
 # Section 1: tf*idf by Term Type
 
-## 1890 - 1929
+## 1880 - 1929
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- subset(termstfidf, EndYear < 1930)
@@ -24,7 +24,7 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Fifty Most Highly Ranked Terms for 1880s through 1920s") +
   xlab("Terms") +
-  ylab("tf*idf") +
+  ylab("") +
   theme(text = element_text(face = "bold"))
 
 ## 1930 - 1959
@@ -45,7 +45,7 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Fifty Most Highly Ranked Terms for 1930s through 1950s") +
   xlab("Terms") +
-  ylab("tf*idf") +
+  ylab("") +
   theme(text = element_text(face = "bold"))
 
 ## 1960 - 1989
@@ -66,7 +66,7 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Fifty Most Highly Ranked Terms for 1960s through 1980s") +
   xlab("Terms") +
-  ylab("tf*idf") +
+  ylab("") +
   theme(text = element_text(face = "bold"))
 
 ## 1990 - 2019
@@ -87,7 +87,7 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Fifty Most Highly Ranked Terms for 1990s through 2010s") +
   xlab("Terms") +
-  ylab("tf*idf") +
+  ylab("") +
   theme(text = element_text(face = "bold"))
 
 # Section 2: tf*idf by Database
@@ -103,6 +103,7 @@ termstfidf <- termstfidf %>%
   arrange(desc(tf_idf)) %>%
   head(50)
 
+jpeg('plots/termsbyDB1880-1920s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
   ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = Database)) +
   geom_col(show.legend = TRUE) +
@@ -110,8 +111,9 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Fifty Most Highly Ranked Terms for 1880s through 1920s") +
   xlab("Terms") +
-  ylab("tf*idf") +
+  ylab("") +
   theme(text = element_text(face = "bold"))
+dev.off()
 
 ## 1930 - 1959
 termstfidf <- tibble(dbterms)
@@ -124,6 +126,7 @@ termstfidf <- termstfidf %>%
   arrange(desc(tf_idf)) %>%
   head(50)
 
+jpeg('plots/termsbyDB1930-1950s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
   ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = Database)) +
   geom_col(show.legend = TRUE) +
@@ -131,8 +134,9 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Fifty Most Highly Ranked Terms for 1930s through 1950s") +
   xlab("Terms") +
-  ylab("tf*idf") +
+  ylab("") +
   theme(text = element_text(face = "bold"))
+dev.off()
 
 ## 1960 - 1989
 termstfidf <- tibble(dbterms)
@@ -145,6 +149,7 @@ termstfidf <- termstfidf %>%
   arrange(desc(tf_idf)) %>%
   head(50)
 
+jpeg('plots/termsbyDB1960-1980s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
   ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = Database)) +
   geom_col(show.legend = TRUE) +
@@ -152,8 +157,9 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Fifty Most Highly Ranked Terms for 1960s through 1980s") +
   xlab("Terms") +
-  ylab("tf*idf") +
+  ylab("") +
   theme(text = element_text(face = "bold"))
+dev.off()
 
 ## 1990 - 2019
 termstfidf <- tibble(dbterms)
@@ -166,6 +172,7 @@ termstfidf <- termstfidf %>%
   arrange(desc(tf_idf)) %>%
   head(50)
 
+jpeg('plots/termsbyDB1990-2010s.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidf %>%
   ggplot(aes(x = reorder(Term, tf_idf), y = tf_idf, fill = Database)) +
   geom_col(show.legend = TRUE) +
@@ -173,5 +180,6 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Fifty Most Highly Ranked Terms for 1990s through 2010s") +
   xlab("Terms") +
-  ylab("tf*idf") +
+  ylab("") +
   theme(text = element_text(face = "bold"))
+dev.off()
