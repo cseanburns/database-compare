@@ -37,7 +37,7 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for 1880s through 1920s") +
   xlab("Terms") +
-  ylab("Term Frequencies") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -62,7 +62,7 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for 1930s through 1950s") +
   xlab("Terms") +
-  ylab("Term Frequencies") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -88,7 +88,7 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for 1960s through 1980s") +
   xlab("Terms") +
-  ylab("Term Frequencies") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -114,7 +114,7 @@ termstfidf %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for 1990s through 2010s") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -153,7 +153,7 @@ termstfidfall %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for all Databases and All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -174,7 +174,7 @@ termstfidfBSP %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for BSP and for All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -195,7 +195,7 @@ termstfidfCINAHL %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for CINAHL and for All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -216,7 +216,7 @@ termstfidfCMMC %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for CMMC and for All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -237,7 +237,7 @@ termstfidfEconLit %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for EconLit and for All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -258,7 +258,7 @@ termstfidfEFT %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for EFT and for All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -279,7 +279,7 @@ termstfidfEIR %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for EIR and for All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -300,7 +300,7 @@ termstfidfGW %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for GW and for All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -321,7 +321,7 @@ termstfidfLISTA %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for LISTA and for All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -342,7 +342,7 @@ termstfidfLL %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for LL and for All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -363,7 +363,7 @@ termstfidfPI %>%
   theme_classic() +
   ggtitle("Top Fifty Terms by tf-idf for PI and for All Years") +
   xlab("Terms") +
-  ylab("") +
+  ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
