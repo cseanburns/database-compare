@@ -17,4 +17,3 @@ dbterms$StartYear[dbterms$StartYear == 1982] <- 1980
 # Assign years to end of decade
 dbterms$EndYear[dbterms$EndYear == 1920] <- 1929
 dbterms$EndYear[dbterms$EndYear == 1981] <- 1989
-
