@@ -4,7 +4,7 @@
 # Needed for 2-basic-analysis.R but not here
 #detach("package:RColorBrewer", unload = TRUE)
 
-##### Section 1: tf*idf faceted by Database #####
+##### Section 1: tf-idf faceted by Database #####
 
 # 1890 - 1929
 
@@ -22,7 +22,7 @@ termstfidf <- termstfidf %>%
   filter(n != 1) %>%
   head(50)
 
-# the term 'propaganda in the schools' has a high tf*idf because
+# the term 'propaganda in the schools' has a high tf-idf because
 # it appears frequently in the data but the database (EIR, the document)
 # only appears very infrequently in the data. 
 # interpretation: so the above term becomes highly relevant when
@@ -35,7 +35,7 @@ termstfidf %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for 1880s through 1920s") +
+  ggtitle("Top Fifty Terms by tf-idf for 1880s through 1920s") +
   xlab("Terms") +
   ylab("Term Frequencies") +
   theme(text = element_text(face = "bold"))
@@ -60,7 +60,7 @@ termstfidf %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for 1930s through 1950s") +
+  ggtitle("Top Fifty Terms by tf-idf for 1930s through 1950s") +
   xlab("Terms") +
   ylab("Term Frequencies") +
   theme(text = element_text(face = "bold"))
@@ -86,7 +86,7 @@ termstfidf %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for 1960s through 1980s") +
+  ggtitle("Top Fifty Terms by tf-idf for 1960s through 1980s") +
   xlab("Terms") +
   ylab("Term Frequencies") +
   theme(text = element_text(face = "bold"))
@@ -112,7 +112,7 @@ termstfidf %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for 1990s through 2010s") +
+  ggtitle("Top Fifty Terms by tf-idf for 1990s through 2010s") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -120,7 +120,7 @@ dev.off()
 
 rm(termstfidf)
 
-##### Section 2: tf*idf Per Database #####
+##### Section 2: tf-idf Per Database #####
 
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
@@ -151,7 +151,7 @@ termstfidfall %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for all Databases and All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for all Databases and All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -172,7 +172,7 @@ termstfidfBSP %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for BSP and for All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for BSP and for All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -193,7 +193,7 @@ termstfidfCINAHL %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for CINAHL and for All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for CINAHL and for All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -214,7 +214,7 @@ termstfidfCMMC %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for CMMC and for All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for CMMC and for All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -235,7 +235,7 @@ termstfidfEconLit %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for EconLit and for All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for EconLit and for All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -256,7 +256,7 @@ termstfidfEFT %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for EFT and for All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for EFT and for All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -277,7 +277,7 @@ termstfidfEIR %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for EIR and for All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for EIR and for All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -298,7 +298,7 @@ termstfidfGW %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for GW and for All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for GW and for All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -319,7 +319,7 @@ termstfidfLISTA %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for LISTA and for All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for LISTA and for All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -340,7 +340,7 @@ termstfidfLL %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for LL and for All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for LL and for All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
@@ -361,7 +361,7 @@ termstfidfPI %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf*idf for PI and for All Years") +
+  ggtitle("Top Fifty Terms by tf-idf for PI and for All Years") +
   xlab("Terms") +
   ylab("") +
   theme(text = element_text(face = "bold"))
