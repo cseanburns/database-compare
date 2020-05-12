@@ -10,7 +10,7 @@ names(yearstermsdb) <- c("Decade", "Frequency")
 yearstermsdb$Decade <- as.Date(yearstermsdb$Decade, "%Y")
 
 # Line plot total number of terms by decade
-#jpeg('plots/growth.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/growth.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 plot(yearstermsdb$Decade, yearstermsdb$Frequency,
   type = "b",
   xlab = "Decades",
@@ -22,7 +22,7 @@ text(yearstermsdb$Decade, yearstermsdb$Frequency,
   offset = 1,
   labels = yearstermsdb$Frequency
 )
-#dev.off()
+dev.off()
 
 # Focus on frequency of database, weighted by frequency of terms per database
 plotcolors <- brewer.pal(8, "Spectral")
@@ -32,7 +32,7 @@ names(weightedDB) <- c("Database", "Term_Frequency")
 weightedDB$Percentage <- round(weightedDB$Term_Frequency 
                                / sum(dbterms$Freq) * 100, 2)
 
-#jpeg('plots/weightedDB.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+jpeg('plots/weightedDB.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 barplot(weightedDB$Percentage,
   col = plotcolors,
   names.arg = weightedDB$Database,
@@ -40,7 +40,7 @@ barplot(weightedDB$Percentage,
   ylab = "Percentage",
   las = 2
 )
-#dev.off()
+dev.off()
 
 # Set up barplots by decade and frequency of terms per database
 weightedDB1890 <- subset(dbterms, subset = dbterms$StartYear == 1880)
