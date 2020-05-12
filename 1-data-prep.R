@@ -1,8 +1,4 @@
-library(plyr) # for count function
-library(dplyr)
-library(tidyr)
-library(tidytext)
-library(ggplot2)
+source("0-load-libraries.R")
 
 dbterms <- read.csv(file = "data/data.csv", header = TRUE, sep = "\t")
 

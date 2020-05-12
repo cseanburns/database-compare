@@ -1,9 +1,8 @@
 # Basic Analysis
 
-library("RColorBrewer") # for plot colors
-
 # Calculate the total number of terms by decade
 yearsterms <- as.table(tapply(dbterms$Freq, dbterms$StartYear, FUN = sum))
+
 # Convert to data frame
 yearstermsdb <- data.frame(yearsterms)
 rm(yearsterms)

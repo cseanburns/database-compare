@@ -1,8 +1,7 @@
 ## Term Analysis
 ## Main reference: https://www.tidytextmining.com/tidytext.html
 
-#source("1-data-prep.R")
-#detach("package:RColorBrewer", unload = TRUE)
+detach("package:RColorBrewer", unload = TRUE)
 
 ##### Section 1: tf*idf faceted by Database #####
 
