@@ -1,7 +1,8 @@
 ## Term Analysis
 ## Main reference: https://www.tidytextmining.com/tidytext.html
 
-detach("package:RColorBrewer", unload = TRUE)
+# Needed for 2-basic-analysis.R but not here
+#detach("package:RColorBrewer", unload = TRUE)
 
 ##### Section 1: tf*idf faceted by Database #####
 
@@ -10,6 +11,7 @@ detach("package:RColorBrewer", unload = TRUE)
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- subset(termstfidf, EndYear < 1930)
+table(termstfidf$StartYear) ; table(termstfidf$EndYear)
 
 # Note that I remove terms, but not documents (databases), that appear only once
 
@@ -43,6 +45,7 @@ dev.off()
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- termstfidf %>% filter(EndYear > 1930 & EndYear < 1960)
+table(termstfidf$StartYear) ; table(termstfidf$EndYear)
 
 termstfidf <- termstfidf %>%
   count(Database, Term) %>%
@@ -68,6 +71,7 @@ dev.off()
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- termstfidf %>% filter(EndYear > 1960 & EndYear < 1990)
+table(termstfidf$StartYear) ; table(termstfidf$EndYear)
 
 termstfidf <- termstfidf %>%
   count(Database, Term) %>%
@@ -93,6 +97,7 @@ dev.off()
 termstfidf <- tibble(dbterms)
 termstfidf <- termstfidf %>% uncount(Freq)
 termstfidf <- termstfidf %>% filter(EndYear > 1990)
+table(termstfidf$StartYear) ; table(termstfidf$EndYear)
 
 termstfidf <- termstfidf %>%
   count(Database, Term) %>%
@@ -138,6 +143,7 @@ termstfidfall <- termstfidf %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidf$Database)
 
 jpeg('plots/terms-per-all-databases.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfall %>%
@@ -158,6 +164,7 @@ termstfidfBSP <- termstfidfBSP %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidfBSP$Database)
 
 jpeg('plots/terms-in-BSP.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfBSP %>%
@@ -178,6 +185,7 @@ termstfidfCINAHL <- termstfidfCINAHL %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidfCINAHL$Database)
 
 jpeg('plots/terms-in-CINAHL.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfCINAHL %>%
@@ -198,6 +206,7 @@ termstfidfCMMC <- termstfidfCMMC %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidfCMMC$Database)
 
 jpeg('plots/terms-in-CMMC.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfCMMC %>%
@@ -218,6 +227,7 @@ termstfidfEconLit <- termstfidfEconLit %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidfEconLit$Database)
 
 jpeg('plots/terms-in-EconLit.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfEconLit %>%
@@ -238,6 +248,7 @@ termstfidfEFT <- termstfidfEFT %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidfEFT$Database)
 
 jpeg('plots/terms-in-EFT.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfEFT %>%
@@ -258,6 +269,7 @@ termstfidfEIR <- termstfidfEIR %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidfEIR$Database)
 
 jpeg('plots/terms-in-EIR.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfEIR %>%
@@ -278,6 +290,7 @@ termstfidfGW <- termstfidfGW %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidfGW$Database)
 
 jpeg('plots/terms-in-GW.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfGW %>%
@@ -298,6 +311,7 @@ termstfidfLISTA <- termstfidfLISTA %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidfLISTA$Database)
 
 jpeg('plots/terms-in-LISTA.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfLISTA %>%
@@ -318,6 +332,7 @@ termstfidfLL <- termstfidfLL %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidfLL$Database)
 
 jpeg('plots/terms-in-LL.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfLL %>%
@@ -338,6 +353,7 @@ termstfidfPI <- termstfidfPI %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
+table(termstfidfPI$Database)
 
 jpeg('plots/terms-in-PI.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfPI %>%
