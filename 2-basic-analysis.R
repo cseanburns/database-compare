@@ -16,7 +16,7 @@ plot(yearstermsdb$Decade, yearstermsdb$Frequency,
   type = "b",
   xlab = "Decades",
   ylab = "Subject Frequencies",
-  main = "Growth of Non-Unique Terms Related to Queries For Fake News"
+  main = "Growth of Terms Related to Queries For Fake News"
 )
 text(yearstermsdb$Decade, yearstermsdb$Frequency,
   pos = 2,
