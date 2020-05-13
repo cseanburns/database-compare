@@ -11,18 +11,12 @@ yearstermsdb$Decade <- as.Date(yearstermsdb$Decade, "%Y")
 
 # Line plot total number of terms by decade
 jpeg('plots/growth.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
-plot(yearstermsdb$Decade, yearstermsdb$Frequency,
-  type = "b",
-  xlab = "Decades",
-  ylab = "Subject Frequencies",
-  main = "Growth of Terms Related to Queries For Fake News"
-)
-text(yearstermsdb$Decade, yearstermsdb$Frequency,
-  pos = 2,
-  offset = 1,
-  labels = yearstermsdb$Frequency
-)
+p <- ggplot(yearstermsdb, aes(x = Decade, y = Frequency, label = Frequency))
+p + geom_smooth(method = "loess") + geom_point() + theme_classic() +
+  geom_text(size = 4, vjust = -3.0) +
+  theme(text = element_text(face = "bold"))
 dev.off()
+rm(p)
 
 # Focus on frequency of database, weighted by frequency of terms per database
 plotcolors <- brewer.pal(8, "Spectral")
