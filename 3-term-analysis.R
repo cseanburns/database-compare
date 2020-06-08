@@ -168,13 +168,13 @@ table(termstfidfBSP$Database)
 
 jpeg('plots/terms-in-BSP.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfBSP %>%
-  ggplot(aes(x = reorder(Term, tf), y = tf)) +
+  ggplot(aes(x = reorder(Term, n), y = n)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
   ggtitle("Top Fifty Business Source Premier Terms, All Years") +
   xlab("Terms") +
-  ylab("tf-idf") +
+  ylab("Count") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -189,13 +189,13 @@ table(termstfidfCINAHL$Database)
 
 jpeg('plots/terms-in-CINAHL.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfCINAHL %>%
-  ggplot(aes(x = reorder(Term, tf), y = tf)) +
+  ggplot(aes(x = reorder(Term, n), y = n)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
   ggtitle("Top Fifty CINAHL Terms, All Years") +
   xlab("Terms") +
-  ylab("tf-idf") +
+  ylab("Count") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -210,13 +210,13 @@ table(termstfidfCMMC$Database)
 
 jpeg('plots/terms-in-CMMC.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfCMMC %>%
-  ggplot(aes(x = reorder(Term, tf), y = tf)) +
+  ggplot(aes(x = reorder(Term, n), y = n)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
   ggtitle("Top Fifty Terms CMMC Terms, All Years") +
   xlab("Terms") +
-  ylab("tf-idf") +
+  ylab("Count") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -231,13 +231,13 @@ table(termstfidfEL$Database)
 
 jpeg('plots/terms-in-EL.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfEL %>%
-  ggplot(aes(x = reorder(Term, tf), y = tf)) +
+  ggplot(aes(x = reorder(Term, n), y = n)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
   ggtitle("Top Fifty EconLit Terms, All Years") +
   xlab("Terms") +
-  ylab("tf-idf") +
+  ylab("Count") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -252,13 +252,13 @@ table(termstfidfEFT$Database)
 
 jpeg('plots/terms-in-EFT.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfEFT %>%
-  ggplot(aes(x = reorder(Term, tf), y = tf)) +
+  ggplot(aes(x = reorder(Term, n), y = n)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
   ggtitle("Top Fifty EFT Terms, All Years") +
   xlab("Terms") +
-  ylab("tf-idf") +
+  ylab("Count") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -273,13 +273,13 @@ table(termstfidfEIR$Database)
 
 jpeg('plots/terms-in-EIR.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfEIR %>%
-  ggplot(aes(x = reorder(Term, tf), y = tf)) +
+  ggplot(aes(x = reorder(Term, n), y = n)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
   ggtitle("Top Fifty EIR Terms, All Years") +
   xlab("Terms") +
-  ylab("tf-idf") +
+  ylab("Count") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -294,13 +294,13 @@ table(termstfidfGW$Database)
 
 jpeg('plots/terms-in-GW.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfGW %>%
-  ggplot(aes(x = reorder(Term, tf), y = tf)) +
+  ggplot(aes(x = reorder(Term, n), y = n)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
   ggtitle("Top Fifty GenderWatch Terms, All Years") +
   xlab("Terms") +
-  ylab("tf-idf") +
+  ylab("Count") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -315,13 +315,13 @@ table(termstfidfLISTA$Database)
 
 jpeg('plots/terms-in-LISTA.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfLISTA %>%
-  ggplot(aes(x = reorder(Term, tf), y = tf)) +
+  ggplot(aes(x = reorder(Term, n), y = n)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
   ggtitle("Top Fifty LISTA Terms, All Years") +
   xlab("Terms") +
-  ylab("tf-idf") +
+  ylab("Count") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -336,13 +336,13 @@ table(termstfidfLL$Database)
 
 jpeg('plots/terms-in-LL.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfLL %>%
-  ggplot(aes(x = reorder(Term, tf), y = tf)) +
+  ggplot(aes(x = reorder(Term, n), y = n)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
   ggtitle("Top Fifty LL Terms, All Years") +
   xlab("Terms") +
-  ylab("tf-idf") +
+  ylab("Count") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
@@ -357,13 +357,13 @@ table(termstfidfPI$Database)
 
 jpeg('plots/terms-in-PI.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
 termstfidfPI %>%
-  ggplot(aes(x = reorder(Term, tf), y = tf)) +
+  ggplot(aes(x = reorder(Term, n), y = n)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
   ggtitle("Top Fifty PI Terms, All Years") +
   xlab("Terms") +
-  ylab("tf-idf") +
+  ylab("Count") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
