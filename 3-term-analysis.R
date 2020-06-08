@@ -35,7 +35,7 @@ termstfidf %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for 1880s through 1920s") +
+  ggtitle("Top Fifty Terms, 1880s through 1920s") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -60,7 +60,7 @@ termstfidf %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for 1930s through 1950s") +
+  ggtitle("Top Fifty Terms, 1930s through 1950s") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -86,7 +86,7 @@ termstfidf %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for 1960s through 1980s") +
+  ggtitle("Top Fifty Terms, 1960s through 1980s") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -112,7 +112,7 @@ termstfidf %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for 1990s through 2010s") +
+  ggtitle("Top Fifty Terms, 1990s through 2010s") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -128,7 +128,7 @@ termstfidf <- termstfidf %>% uncount(Freq)
 termstfidfBSP     <- subset(termstfidf, Database == "BSP")
 termstfidfCINAHL  <- subset(termstfidf, Database == "CINAHL")
 termstfidfCMMC    <- subset(termstfidf, Database == "CMMC")
-termstfidfEconLit <- subset(termstfidf, Database == "EconLit")
+termstfidfEL      <- subset(termstfidf, Database == "EL")
 termstfidfEFT     <- subset(termstfidf, Database == "EFT")
 termstfidfEIR     <- subset(termstfidf, Database == "EIR")
 termstfidfGW      <- subset(termstfidf, Database == "GW")
@@ -151,7 +151,7 @@ termstfidfall %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for all Databases and All Years") +
+  ggtitle("Top Fifty Terms, All Databases and Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -172,7 +172,7 @@ termstfidfBSP %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for BSP and for All Years") +
+  ggtitle("Top Fifty Business Source Premier Terms, All Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -193,7 +193,7 @@ termstfidfCINAHL %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for CINAHL and for All Years") +
+  ggtitle("Top Fifty CINAHL Terms, All Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -214,28 +214,28 @@ termstfidfCMMC %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for CMMC and for All Years") +
+  ggtitle("Top Fifty Terms CMMC Terms, All Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
-# EconLit
+# EconLit (EL)
 
-termstfidfEconLit <- termstfidfEconLit %>%
+termstfidfEL <- termstfidfEL %>%
   count(Database, Term) %>%
   bind_tf_idf(Term, Database, n) %>%
   arrange(desc(tf)) %>%
   head(50)
-table(termstfidfEconLit$Database)
+table(termstfidfEL$Database)
 
-jpeg('plots/terms-in-EconLit.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
-termstfidfEconLit %>%
+jpeg('plots/terms-in-EL.jpg', width = 3840, height = 2160, pointsize = 12, res = 300)
+termstfidfEL %>%
   ggplot(aes(x = reorder(Term, tf), y = tf)) +
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for EconLit and for All Years") +
+  ggtitle("Top Fifty EconLit Terms, All Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -256,7 +256,7 @@ termstfidfEFT %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for EFT and for All Years") +
+  ggtitle("Top Fifty EFT Terms, All Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -277,7 +277,7 @@ termstfidfEIR %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for EIR and for All Years") +
+  ggtitle("Top Fifty EIR Terms, All Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -298,7 +298,7 @@ termstfidfGW %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for GW and for All Years") +
+  ggtitle("Top Fifty GenderWatch Terms, All Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -319,7 +319,7 @@ termstfidfLISTA %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for LISTA and for All Years") +
+  ggtitle("Top Fifty LISTA Terms, All Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -340,7 +340,7 @@ termstfidfLL %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for LL and for All Years") +
+  ggtitle("Top Fifty LL Terms, All Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
@@ -361,12 +361,12 @@ termstfidfPI %>%
   geom_col(show.legend = TRUE) +
   coord_flip() +
   theme_classic() +
-  ggtitle("Top Fifty Terms by tf-idf for PI and for All Years") +
+  ggtitle("Top Fifty PI Terms, All Years") +
   xlab("Terms") +
   ylab("tf-idf") +
   theme(text = element_text(face = "bold"))
 dev.off()
 
-rm(termstfidfBSP, termstfidfCINAHL, termstfidfCMMC, termstfidfEconLit,
+rm(termstfidfBSP, termstfidfCINAHL, termstfidfCMMC, termstfidfEL,
    termstfidfEFT, termstfidfEIR, termstfidfGW, termstfidfLISTA, 
    termstfidfLL, termstfidfPI, termstfidfall, termstfidf)
